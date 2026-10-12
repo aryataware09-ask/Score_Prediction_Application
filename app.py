@@ -77,21 +77,20 @@ with st.container():
     st.markdown("<br>", unsafe_allow_html=True)
     predict_btn = st.button("Predict Performance")
 
-# Prediction and Results Section (Handled after button click)
+# Prediction and Results Section
 if predict_btn:
-    # Mappings to convert categorical inputs into numerical labels matching the model's encoder
+    # Mappings to convert categorical inputs into numerical labels matching the model's training format
     gender_mapping = {"Male": 0, "Female": 1, "Other": 2}
+    course_mapping = {"Engineering": 0, "Science": 1, "Arts": 2, "Business": 3, "Medicine": 4}
     internet_mapping = {"No": 0, "Yes": 1}
     sleep_quality_mapping = {"Poor": 0, "Average": 1, "Good": 2}
     study_method_mapping = {"Self-study": 0, "Group study": 1, "Online videos": 2, "Textbooks": 3}
     exam_difficulty_mapping = {"Easy": 0, "Moderate": 1, "Hard": 2}
     
-    # Note: If 'course' was also encoded numerically during training, map it here similarly.
-    # Otherwise, leave it as a string if your model pipeline handles it automatically.
     input_data = pd.DataFrame({
         'age': [age],
         'gender': [gender_mapping[gender]],
-        'course': [course],
+        'course': [course_mapping[course]],
         'study_hours': [study_hours],
         'class_attendance': [class_attendance],
         'internet_access': [internet_mapping[internet_access]],
